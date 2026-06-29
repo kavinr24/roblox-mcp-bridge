@@ -11,7 +11,5 @@ MCP bridge that connects Roblox Studio to local AI agents
 ### Running from Source
 1. Clone this repository to your local machine.
 2. Edit `config.json` and paste your absolute path into the `ROBLOX_MCP_PATH` variable.
-3. Install all dependencies with `pip install -r requirements.txt`.
-4. Run `bridge.py`
-
+3. Double-click `run.bat` to automatically build the virtual environment, install dependencies, and launch the server.
 
