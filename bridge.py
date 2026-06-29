@@ -10,7 +10,21 @@ import uvicorn
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
-mcp_path= "C:\\Users\\kavin\\AppData\\Local\\Roblox\\mcp.bat"
+
+config="config.json"
+if not os.path.exists(config):
+    raise RuntimeError("config.json not found")
+
+with open(config, "r") as f:
+    config_data = json.load(f)
+
+
+mcp_path = config_data.get("ROBLOX_MCP_PATH")
+if not mcp_path:
+    raise ValueError("ROBLOX_MCP_PATH is not set in config.json")
+
+server_port = config_data.get("SERVER_PORT", 8000)
+allow_remote_agent = config_data.get("ALLOW_REMOTE_AGENT", False)
 
 app = FastAPI("Roblox Mcp Bridge")
 
@@ -77,5 +91,5 @@ async def get_available_tools():
     return tools_response.model_dump() if hasattr(tools_response, 'model_dump') else tools_response
 
 if __name__ == "__main__":
-    print(f"Starting bridge on http://localhost:{8000}")
-    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")
+    print(f"Starting bridge on http://localhost:{server_port}")
+    uvicorn.run(app, host="127.0.0.1", port=server_port, log_level="info")
