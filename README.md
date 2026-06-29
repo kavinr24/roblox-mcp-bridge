@@ -13,3 +13,13 @@ MCP bridge that connects Roblox Studio to local AI agents
 2. Edit `config.json` and paste your absolute path into the `ROBLOX_MCP_PATH` variable.
 3. Double-click `run.bat` to automatically build the virtual environment, install dependencies, and launch the server.
 
+## Usage
+
+Once the bridge is running, any AI agent or local script can control Roblox Studio by sending HTTP requests to the server.
+
+### Discover Available Studio Tools
+Before running commands, contact the bridge to see which functions your current version of Roblox Studio exposes.
+
+**cURL:**
+```bash
+curl -X GET [http://127.0.0.1:8000/tools](http://127.0.0.1:8000/tools)
